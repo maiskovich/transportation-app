@@ -11,8 +11,11 @@
         </md-button>
       </div>
     </md-toolbar>
-    <p>{{ clock.Time | date:'HH:mm:ss'}}</p>
-    <div layout="row" layout-sm="column" layout-align="center center" style="height: 90vh">
+    <div layout="column" layout-align="center center">
+    <h3 class="md-headline" >{{ clock.Time | date:'HH:mm:ss'}}</h3>
+      <h3 class="md-headline" >{{ clock.Time | date:'EEEE dd, MMMM, yyyy'}}</h3>
+    </div>
+      <div layout="row" layout-sm="column" layout-align="center center" style="height: 50vh">
       <div flex>
         <md-input-container>
           <md-select ng-model="departure" placeholder="Departure">
