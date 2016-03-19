@@ -17,18 +17,41 @@
     </div>
       <div layout="row" layout-sm="column" layout-align="center center" style="height: 50vh">
       <div flex>
-        <md-input-container>
-          <md-select ng-model="departure" placeholder="Departure">
-            <md-option ng-value="opt" ng-repeat="opt in neighborhoods2">{{ opt }}</md-option>
-          </md-select>
-        </md-input-container>
+        <md-autocomplete required
+          md-selected-item="main.selectedItemDeparture"
+                         md-selected-item-change="main.departureSelected()"
+          md-search-text="searchText"
+          md-items="stop in main.stopsData.data | filter:(!!searchText || undefined) && {stop_name: searchText}"
+          md-item-text="stop.stop_name" md-match-case-insensitive="true"
+          md-select-on-match="true"
+          md-min-length="0"
+          placeholder="Departure">
+          <md-item-template>
+            <span md-highlight-text="searchText" md-highlight-flags="^i">{{stop.stop_name}}</span>
+          </md-item-template>
+          <md-not-found>
+            No stops matching "{{searchText}}" were found.
+          </md-not-found>
+        </md-autocomplete>
       </div>
       <div flex>
-        <md-input-container>
-          <md-select ng-model="arrival" placeholder="Arrival">
-            <md-option ng-value="opt" ng-repeat="opt in neighborhoods2">{{ opt }}</md-option>
-          </md-select>
-        </md-input-container>
+        <md-autocomplete required
+                         ng-disabled="!main.selectedItemDeparture"
+                         md-selected-item="main.selectedItemArrival"
+                         md-selected-item-change="main.arrivalSelected()"
+                         md-search-text="searchTextArrival"
+                         md-items="stop in main.stopsDataArrival.data | filter:(!!searchTextArrival || undefined) && {stop_name: searchTextArrival}"
+                         md-item-text="stop.stop_name" md-match-case-insensitive="true"
+                         md-select-on-match="true"
+                         md-min-length="0"
+                         placeholder="Arrival">
+          <md-item-template>
+            <span md-highlight-text="searchTextArrival" md-highlight-flags="^i">{{stop.stop_name}}</span>
+          </md-item-template>
+          <md-not-found>
+            No stops matching "{{searchTextArrival}}" were found.
+          </md-not-found>
+        </md-autocomplete>
       </div>
     </div>
 

@@ -4,20 +4,27 @@ export class TransportDataService {
 
     this.$log = $log;
     this.$http = $http;
-    this.apiHost = '';
   }
 
-  getData(limit) {
-    if (!limit) {
-      limit = 30;
-    }
+  getStops() {
 
-    return this.$http.get(this.apiHost)
+    return this.$http.get('/data/GTFS/stops.txt')
       .then((response) => {
-        return response.data;
+        return Papa.parse(response.data,{header: true,skipEmptyLines: true});
+      })
+      .catch((error) => {
+        this.$log.error('XHR Failed for get transportation data.\n' + angular.toJson(error.data, true));
+      });
+  }
+  getStopsTimes() {
+
+    return this.$http.get('/data/GTFS/stop_times.txt')
+      .then((response) => {
+        return Papa.parse(response.data,{header: true,skipEmptyLines: true});
       })
       .catch((error) => {
         this.$log.error('XHR Failed for get transportation data.\n' + angular.toJson(error.data, true));
       });
   }
 }
+
