@@ -5,6 +5,7 @@ export class MainController {
     clock.getHour($scope.clock);
     this.transportCalculation=transportCalculation;
     this.transportStaticData(transportData);
+    this.clock=$scope.clock;
 
   }
   transportStaticData(transportData){
@@ -25,7 +26,7 @@ export class MainController {
   }
   arrivalSelected(){
     console.log(this.selectedItemArrival);
-    this.transportCalculation.getTransportOptions(this.selectedItemDeparture,this.selectedItemArrival);
+    this.transportCalculation.getTransportOptions(this.selectedItemDeparture,this.selectedItemArrival,this.clock.Time);
   }
 
 }
