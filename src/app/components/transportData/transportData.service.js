@@ -12,7 +12,17 @@ export class TransportDataService {
         return Papa.parse(response.data,{header: true,skipEmptyLines: true});
       })
       .catch((error) => {
-        this.$log.error('XHR Failed for get transportation data.\n' + angular.toJson(error.data, true));
+        this.$log.error('XHR Failed for get calendar data.\n' + angular.toJson(error.data, true));
+      });
+  }
+  getTrips() {
+
+    return this.$http.get('/data/GTFS/trips.txt')
+      .then((response) => {
+        return Papa.parse(response.data,{header: true,skipEmptyLines: true});
+      })
+      .catch((error) => {
+        this.$log.error('XHR Failed for get trips data.\n' + angular.toJson(error.data, true));
       });
   }
   getStops() {
