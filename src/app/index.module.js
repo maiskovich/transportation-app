@@ -23,6 +23,13 @@ angular.module('transportationApp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSan
   .service('transportData', TransportDataService)
   .service('transportCalculation', TransportCalculationService)
   .service('webDevTec', WebDevTecService)
+  .filter('asDate', function () {
+    return function (input) {
+      input=input.split(':');
+      input[0]=(input[0] > 23) ? input[0]-24 : input[0];
+      return new Date('1/1/2016 '+input[0]+':'+input[1]+':'+input[2]);
+    }
+  })
   .controller('MainController', MainController)
   .directive('acmeNavbar', NavbarDirective)
   .directive('acmeMalarkey', MalarkeyDirective);

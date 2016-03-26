@@ -23,7 +23,11 @@ export class MainController {
   this.stopsDataArrival.data.splice(index, 1);
   }
   arrivalSelected(){
-    this.transportCalculation.getTransportOptions(this.selectedItemDeparture,this.selectedItemArrival,this.clock.Time);
+    console.log(this.selectedItemDeparture);
+   this.transportCalculation.getTransportOptions(this.selectedItemDeparture,this.selectedItemArrival,this.clock.Time).then(possibleTrips=>
+   {
+     this.possibleTrips=possibleTrips;
+   });
   }
 
 }
