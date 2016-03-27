@@ -3,7 +3,7 @@
   <md-content>
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <span>Public transportation App</span>
+        <md-icon aria-label="Menu" class="material-icons trip-option-icon">directions_railway</md-icon>
         <!-- fill up the space between left and right area -->
         <span flex></span>
         <h3 ng-if="main.possibleTrips" class="md-headline" >{{ clock.Time | date:'EEEE dd, MMMM, yyyy HH:mm'}}</h3>
@@ -54,26 +54,29 @@
       </div>
     </div>
     </div>
-      <md-list>
-        <md-list-item class="md-3-line" ng-repeat="trip in main.possibleTrips  | orderBy : Number(trip.departure.departure_time) | limitTo:20">
+      <md-list ng-if="main.possibleTrips.length">
+        <md-list-item class="md-3-line" ng-repeat="trip in main.possibleTrips  | orderBy : Number(trip.departure.departure_time) | limitTo:10">
           <div class="md-list-item-text">
-            <div layout="row" layout-sm="column" layout-align="center center" style="height: 50vh">
+            <h2>{{trip.trip.trip_headsign}}</h2>
+            <div layout="row" layout-sm="column" layout-align="center center" style="height: 30vh">
               <div flex>
-            <md-icon aria-label="Menu" class="material-icons trip-option-icon">flight_takeoff</md-icon>
+            <md-icon aria-label="Menu" class="material-icons trip-option-icon">call_made</md-icon>
                 <h2>{{trip.departure.departure_time | asDate | date:'HH:mm'}}</h2>
-                <h4>{{trip.departure.stop_headsign}}</h4>
+                <h4>{{main.selectedItemDeparture.stop_name}}</h4>
             </div>
               <div flex>
-                <md-icon aria-label="Menu" class="material-icons trip-option-icon">flight_land</md-icon>
+                <md-icon aria-label="Menu" class="material-icons trip-option-icon">call_received</md-icon>
                 <h2>{{trip.arrival.arrival_time | asDate | date:'HH:mm'}}</h2>
-                <h4>{{trip.arrival.stop_headsign}}</h4>
+                <h4>{{main.selectedItemArrival.stop_name}}</h4>
                </div>
             </div>
           </div>
           <md-divider ng-if="!$last"></md-divider>
         </md-list-item>
       </md-list>
-
+    <md-content ng-if="!main.possibleTrips.length && main.possibleTrips" flex layout-padding>
+      <p>No trips found between the selected stops</p>
+    </md-content>
   </md-content>
 
 </div>

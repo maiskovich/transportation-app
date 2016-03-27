@@ -8,6 +8,7 @@ import { GithubContributorService } from '../app/components/githubContributor/gi
 import { ClockService } from '../app/components/clock/clock.service';
 import { TransportDataService } from '../app/components/transportData/transportData.service';
 import { TransportCalculationService } from '../app/components/transportCalculation/transportCalculation.service';
+import { ServiceWorkerService } from '../app/components/serviceWorker/serviceWorker.service';
 import { WebDevTecService } from '../app/components/webDevTec/webDevTec.service';
 import { NavbarDirective } from '../app/components/navbar/navbar.directive';
 import { MalarkeyDirective } from '../app/components/malarkey/malarkey.directive';
@@ -22,6 +23,7 @@ angular.module('transportationApp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSan
   .service('clock', ClockService)
   .service('transportData', TransportDataService)
   .service('transportCalculation', TransportCalculationService)
+  .service('serviceWorker', ServiceWorkerService)
   .service('webDevTec', WebDevTecService)
   .filter('asDate', function () {
     return function (input) {

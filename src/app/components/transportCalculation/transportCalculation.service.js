@@ -27,7 +27,7 @@ export class TransportCalculationService {
           let arrivalStopsTimes = stopsTimesData.data.filter((stop) => stop.stop_id === arrival.stop_id);
 
         let possibleTripsByStop=[];
-        angular.forEach(departureStopsTimes, function(value, key) {
+        angular.forEach(departureStopsTimes, function(value) {
           let trip=arrivalStopsTimes.filter((stop) =>  stop.trip_id === value.trip_id && Number(stop.stop_sequence) > Number(value.stop_sequence));
           if(trip[0]){
             possibleTripsByStop.push(
@@ -38,14 +38,18 @@ export class TransportCalculationService {
           }
         });
         let possibleTripsByCalendar=[];
-        angular.forEach(tripsByCalendar, function(tripCalendar, key) {
+        angular.forEach(tripsByCalendar, function(tripCalendar) {
           let trip=possibleTripsByStop.filter((stop) =>  stop.departure.trip_id === tripCalendar.trip_id );
           if(trip[0]){
-            possibleTripsByCalendar.push(trip[0]);
+            possibleTripsByCalendar.push({
+              departure:trip[0].departure,
+              arrival:  trip[0].arrival,
+              trip:tripCalendar
+            });
           }
 
         });
-        console.log(possibleTripsByCalendar);
+        this.$log.log(possibleTripsByCalendar);
         deferred.resolve(possibleTripsByCalendar);
       }
     );

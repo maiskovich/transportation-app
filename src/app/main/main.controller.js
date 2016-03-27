@@ -1,11 +1,13 @@
 export class MainController {
-  constructor (clock,$scope,transportData,transportCalculation) {
+  constructor (clock,$scope,transportData,transportCalculation,serviceWorker) {
     'ngInject';
+    serviceWorker.register();
     $scope.clock= {Time: 0};
     clock.getHour($scope.clock);
     this.transportCalculation=transportCalculation;
     this.transportStaticData(transportData);
     this.clock=$scope.clock;
+
 
   }
   transportStaticData(transportData){
