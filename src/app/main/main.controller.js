@@ -25,7 +25,6 @@ export class MainController {
   this.stopsDataArrival.data.splice(index, 1);
   }
   arrivalSelected(){
-    console.log(this.selectedItemDeparture);
    this.transportCalculation.getTransportOptions(this.selectedItemDeparture,this.selectedItemArrival,this.clock.Time).then(possibleTrips=>
    {
      this.possibleTrips=possibleTrips;

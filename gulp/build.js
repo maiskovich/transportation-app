@@ -34,7 +34,7 @@ gulp.task('html', ['inject', 'partials'], function () {
   };
 
   var htmlFilter = $.filter('*.html', { restore: true });
-  var jsFilter = $.filter('**/*.js', { restore: true });
+  var jsFilter = $.filter(['**/*.js', '!sw.js'], { restore: true });
   var cssFilter = $.filter('**/*.css', { restore: true });
   var assets;
 

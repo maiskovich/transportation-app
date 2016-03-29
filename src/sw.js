@@ -1,4 +1,4 @@
-var staticCacheName = 'transportation-static-v1';
+var staticCacheName = 'transportation-static-v17';
 var allCaches = [
   staticCacheName
 ];
@@ -7,7 +7,6 @@ self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(staticCacheName).then(function(cache) {
       return cache.addAll([
-        '/data',
         '/data/GTFS',
         '/fonts',
         '/maps',
@@ -15,8 +14,7 @@ self.addEventListener('install', function(event) {
         '/maps/styles',
         '/scripts',
         '/styles',
-        'index.html',
-        'sw.js'
+        'index.html'
       ]);
     })
   );
@@ -25,11 +23,13 @@ self.addEventListener('install', function(event) {
 self.addEventListener('activate', function(event) {
   event.waitUntil(
     caches.keys().then(function(cacheNames) {
+      console.log(cacheNames);
       return Promise.all(
         cacheNames.filter(function(cacheName) {
           return cacheName.startsWith('transportation-') &&
             !allCaches.includes(cacheName);
         }).map(function(cacheName) {
+          console.log(cacheName);
           return caches.delete(cacheName);
         })
       );
