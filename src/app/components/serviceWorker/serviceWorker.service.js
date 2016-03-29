@@ -6,7 +6,7 @@ export class ServiceWorkerService {
   }
   register() {
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw/sw.js').then(registration => {
+      navigator.serviceWorker.register('/sw.js', { scope: '/' }).then(registration => {
         this.$log.log('ServiceWorker registration successful with: ', registration);
       }).catch(err=> {
         this.$log.log('ServiceWorker registration failed: ', err);

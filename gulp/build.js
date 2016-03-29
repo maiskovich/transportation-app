@@ -94,10 +94,10 @@ gulp.task('sw', function () {
     return file.stat.isFile();
   });
   return gulp.src([
-    path.join(conf.paths.src, '/sw/*')
+    path.join(conf.paths.src, '/sw.js')
   ])
     .pipe(fileFilter)
-    .pipe(gulp.dest(path.join(conf.paths.dist, '/sw')));
+    .pipe(gulp.dest(path.join(conf.paths.dist, '/')));
 });
 
 gulp.task('clean', function () {
