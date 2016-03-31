@@ -3,16 +3,22 @@
   <md-content>
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <md-icon aria-label="Menu" class="material-icons trip-option-icon">directions_railway</md-icon>
+        <md-icon ng-click="main.resetSearch()" aria-label="Menu" class="material-icons trip-option-icon">directions_railway</md-icon>
         <!-- fill up the space between left and right area -->
         <span flex></span>
-        <h3 ng-if="main.possibleTrips" class="md-headline" >{{ clock.Time | date:'EEEE dd, MMMM, yyyy HH:mm'}}</h3>
+        <h3 ng-if="main.possibleTrips && !main.selectedDate" class="md-headline" >{{ clock.Time | date:'EEEE dd, MMMM, yyyy HH:mm'}}</h3>
+        <h3 ng-if="main.possibleTrips && main.selectedDate" class="md-headline" >{{ main.selectedDate | date:'EEEE dd, MMMM, yyyy HH:mm'}}</h3>
       </div>
     </md-toolbar>
-    <div ng-if="!main.possibleTrips">
+    <div ng-if="!main.possibleTrips" class="animate-if">
     <div layout="column" layout-align="center center">
-    <h3 class="md-headline" >{{ clock.Time | date:'HH:mm:ss'}}</h3>
-      <h3 class="md-headline" >{{ clock.Time | date:'EEEE dd, MMMM, yyyy'}}</h3>
+    <h3 class="md-headline" ng-if="main.changeDate=='off' && !main.selectedDate" class="animate-if">{{ clock.Time | date:'HH:mm:ss'}}</h3>
+      <h3 class="md-headline" ng-if="main.changeDate=='off' && !main.selectedDate" class="animate-if">{{ clock.Time | date:'EEEE dd, MMMM, yyyy'}}</h3>
+      <h3 class="md-headline" ng-if="main.changeDate=='off' && main.selectedDate" class="animate-if">{{ main.selectedDate | date:'HH:mm:ss'}}</h3>
+      <h3 class="md-headline" ng-if="main.changeDate=='off' && main.selectedDate" class="animate-if">{{ main.selectedDate | date:'EEEE dd, MMMM, yyyy'}}</h3>
+      <md-button ng-if="main.changeDate=='off'" ng-click="main.changeDate='on'" class="md-raised md-primary animate-if"> Other Date </md-button>
+      <time-date-picker ng-if="main.changeDate=='on'" class="animate-if" ng-model="main.selectedDate" on-save="main.selectManualDate()" on-cancel="main.changeDate='off'">
+      </time-date-picker>
     </div>
       <div layout="row" layout-sm="column" layout-align="center center" style="height: 50vh">
       <div flex>

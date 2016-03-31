@@ -7,8 +7,13 @@ export class MainController {
     this.transportCalculation=transportCalculation;
     this.transportStaticData(transportData);
     this.clock=$scope.clock;
-
-
+    this.changeDate='off';
+    this.selectedDate=this.clock.Time;
+  }
+  selectManualDate(){
+    this.selectedDate=this.selectedDate;
+    this.changeDate='off';
+    console.log(this.selectedDate);
   }
   transportStaticData(transportData){
     transportData.getStops().then(stopsData =>
@@ -16,8 +21,6 @@ export class MainController {
       this.stopsData=stopsData;
     }
     );
-
-
   }
   departureSelected(){
   this.stopsDataArrival=this.stopsData;
@@ -25,10 +28,15 @@ export class MainController {
   this.stopsDataArrival.data.splice(index, 1);
   }
   arrivalSelected(){
-   this.transportCalculation.getTransportOptions(this.selectedItemDeparture,this.selectedItemArrival,this.clock.Time).then(possibleTrips=>
+    if(this.selectedItemDeparture && this.selectedItemArrival){
+   this.transportCalculation.getTransportOptions(this.selectedItemDeparture,this.selectedItemArrival,this.selectedDate).then(possibleTrips=>
    {
      this.possibleTrips=possibleTrips;
    });
+    }
+  }
+  resetSearch(){
+    this.possibleTrips='';
   }
 
 }

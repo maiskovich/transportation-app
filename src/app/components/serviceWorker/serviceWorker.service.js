@@ -4,7 +4,6 @@ export class ServiceWorkerService {
     this.$log = $log;
     this.$http = $http;
     this.$mdToast=$mdToast;
-    this.self=this;
   }
   register() {
     let self=this;
@@ -29,15 +28,16 @@ export class ServiceWorkerService {
 
   };
   trackInstalling(worker) {
+    let self=this;
   worker.addEventListener('statechange', function() {
     if (worker.state == 'installed') {
-      this.self.updateReady(worker);
+      self.updateReady(worker);
     }
   });
 };
 
   updateReady(worker) {
-    var toast = this.$mdToast.simple()
+    var toast = this.$mdToast.simple({hideDelay: 5000})
       .textContent('New update available')
       .action('UPDATE')
       .highlightAction(true);
