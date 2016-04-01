@@ -17,7 +17,10 @@
       <h3 class="md-headline" ng-if="main.changeDate=='off' && main.selectedDate" class="animate-if">{{ main.selectedDate | date:'HH:mm:ss'}}</h3>
       <h3 class="md-headline" ng-if="main.changeDate=='off' && main.selectedDate" class="animate-if">{{ main.selectedDate | date:'EEEE dd, MMMM, yyyy'}}</h3>
       <md-button ng-if="main.changeDate=='off'" ng-click="main.changeDate='on'" class="md-raised md-primary animate-if"> Other Date </md-button>
-      <time-date-picker ng-if="main.changeDate=='on'" class="animate-if" ng-model="main.selectedDate" on-save="main.selectManualDate()" on-cancel="main.changeDate='off'">
+      <br>
+      <time-date-picker ng-if="main.changeDate=='on'" class="animate-if" ng-model="main.selectedDate"
+                        on-save="main.selectManualDate()" on-cancel="main.changeDate='off'"
+                        display-twentyfour="true">
       </time-date-picker>
     </div>
       <div layout="row" layout-sm="column" layout-align="center center" style="height: 50vh">
