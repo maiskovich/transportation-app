@@ -4,27 +4,20 @@ import { config } from './index.config';
 import { routerConfig } from './index.route';
 import { runBlock } from './index.run';
 import { MainController } from './main/main.controller';
-import { GithubContributorService } from '../app/components/githubContributor/githubContributor.service';
 import { ClockService } from '../app/components/clock/clock.service';
 import { TransportDataService } from '../app/components/transportData/transportData.service';
 import { TransportCalculationService } from '../app/components/transportCalculation/transportCalculation.service';
 import { ServiceWorkerService } from '../app/components/serviceWorker/serviceWorker.service';
-import { WebDevTecService } from '../app/components/webDevTec/webDevTec.service';
-import { NavbarDirective } from '../app/components/navbar/navbar.directive';
-import { MalarkeyDirective } from '../app/components/malarkey/malarkey.directive';
+import { TripsdisplayDirective } from '../app/components/tripsdisplay/tripsdisplay.directive';
 
 angular.module('transportationApp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'ngResource', 'ui.router', 'ngMaterial', 'toastr', 'scDateTime'])
-  .constant('malarkey', malarkey)
-  .constant('moment', moment)
   .config(config)
   .config(routerConfig)
   .run(runBlock)
-  .service('githubContributor', GithubContributorService)
   .service('clock', ClockService)
   .service('transportData', TransportDataService)
   .service('transportCalculation', TransportCalculationService)
   .service('serviceWorker', ServiceWorkerService)
-  .service('webDevTec', WebDevTecService)
   .filter('asDate', function () {
     return function (input) {
       input=input.split(':');
@@ -33,5 +26,4 @@ angular.module('transportationApp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSan
     }
   })
   .controller('MainController', MainController)
-  .directive('acmeNavbar', NavbarDirective)
-  .directive('acmeMalarkey', MalarkeyDirective);
+  .directive('tripsDisplay', TripsdisplayDirective)

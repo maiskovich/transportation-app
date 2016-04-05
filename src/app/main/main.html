@@ -11,6 +11,7 @@
       </div>
     </md-toolbar>
     <div ng-if="!main.possibleTrips" class="animate-if">
+      <form name="main.transportForm" novalidate ng-submit="main.arrivalSelected()" autocomplete="on">
     <div layout="column" layout-align="center center">
     <h3 class="md-headline" ng-if="main.changeDate=='off' && !main.selectedDate" class="animate-if">{{ clock.Time | date:'HH:mm'}}</h3>
       <h3 class="md-headline" ng-if="main.changeDate=='off' && !main.selectedDate" class="animate-if">{{ clock.Time | date:'EEEE dd, MMMM, yyyy'}}</h3>
@@ -25,15 +26,16 @@
     </div>
       <div layout="row" layout-sm="column" layout-align="center center" style="height: 30vh">
       <div flex>
-        <md-autocomplete required
-          md-selected-item="main.selectedItemDeparture"
-                         md-selected-item-change="main.departureSelected()"
-          md-search-text="searchText"
-          md-items="stop in main.stopsData.data | filter:(!!searchText || undefined) && {stop_name: searchText}"
-          md-item-text="stop.stop_name" md-match-case-insensitive="true"
-          md-select-on-match="true"
-          md-min-length="0"
-          placeholder="Departure">
+        <md-autocomplete required="true"
+                         md-input-name="selectedItemDeparture"
+                          md-selected-item="main.selectedItemDeparture"
+                          md-selected-item-change="main.departureSelected()"
+                          md-search-text="searchText"
+                          md-items="stop in main.stopsData.data | filter:(!!searchText || undefined) && {stop_name: searchText}"
+                          md-item-text="stop.stop_name" md-match-case-insensitive="true"
+                          md-select-on-match="true"
+                          md-min-length="0"
+                          placeholder="Departure">
           <md-item-template>
             <span md-highlight-text="searchText" md-highlight-flags="^i">{{stop.stop_name}}</span>
           </md-item-template>
@@ -41,9 +43,14 @@
             No stops matching "{{searchText}}" were found.
           </md-not-found>
         </md-autocomplete>
+        <span class="help-block" ng-show="main.transportForm.selectedItemDeparture.$error.required && main.transportForm.selectedItemDeparture.$touched">Departure station is required.</span>
+        <span class="help-block" ng-show="!main.selectedItemDeparture
+        && main.transportForm.selectedItemDeparture.$touched
+        && !main.transportForm.selectedItemDeparture.$error.required">You should choose a valid departure station.</span>
       </div>
       <div flex>
-        <md-autocomplete required
+        <md-autocomplete required="true"
+                         md-input-name="selectedItemArrival"
                          ng-disabled="!main.selectedItemDeparture"
                          md-selected-item="main.selectedItemArrival"
                          md-search-text="searchTextArrival"
@@ -59,35 +66,18 @@
             No stops matching "{{searchTextArrival}}" were found.
           </md-not-found>
         </md-autocomplete>
+        <span class="help-block" ng-show="main.transportForm.selectedItemArrival.$error.required && main.transportForm.selectedItemArrival.$touched">Arrival station is required.</span>
+        <span class="help-block" ng-show="!main.selectedItemArrival
+        && main.transportForm.selectedItemArrival.$touched
+        && !main.transportForm.selectedItemArrival.$error.required">You should choose a valid arrival station.</span>
       </div>
     </div>
       <div layout="column"   layout-align="start center">
-        <md-button ng-click="main.arrivalSelected()" class="md-raised md-primary animate-if"> Search </md-button>
+        <md-button ng-disabled="main.transportForm.$invalid || !main.selectedItemDeparture || !main.selectedItemArrival" type="submit" class="md-raised md-primary animate-if"> Search </md-button>
       </div>
+        </form>
     </div>
-      <md-list ng-if="main.possibleTrips.length">
-        <md-list-item class="md-3-line" ng-repeat="trip in main.possibleTrips  | orderBy : Number(trip.departure.departure_time) | limitTo:10">
-          <div class="md-list-item-text">
-            <h2>{{trip.trip.trip_headsign}}</h2>
-            <div layout="row" layout-sm="column" layout-align="center center" style="height: 30vh">
-              <div flex>
-            <md-icon aria-label="Menu" class="material-icons trip-option-icon">call_made</md-icon>
-                <h2>{{trip.departure.departure_time | asDate | date:'HH:mm'}}</h2>
-                <h4>{{main.selectedItemDeparture.stop_name}}</h4>
-            </div>
-              <div flex>
-                <md-icon aria-label="Menu" class="material-icons trip-option-icon">call_received</md-icon>
-                <h2>{{trip.arrival.arrival_time | asDate | date:'HH:mm'}}</h2>
-                <h4>{{main.selectedItemArrival.stop_name}}</h4>
-               </div>
-            </div>
-          </div>
-          <md-divider ng-if="!$last"></md-divider>
-        </md-list-item>
-      </md-list>
-    <md-content ng-if="!main.possibleTrips.length && main.possibleTrips" flex layout-padding>
-      <p>No trips found between the selected stops</p>
-    </md-content>
+      <trips-display></trips-display>
   </md-content>
 
 </div>

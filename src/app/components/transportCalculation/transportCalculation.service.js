@@ -49,7 +49,6 @@ export class TransportCalculationService {
           }
 
         });
-        this.$log.log(possibleTripsByCalendar);
         deferred.resolve(possibleTripsByCalendar);
       }
     );

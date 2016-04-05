@@ -9,11 +9,11 @@ export class MainController {
     this.clock=$scope.clock;
     this.changeDate='off';
     this.selectedDate=this.clock.Time;
+    this.$scope=$scope;
   }
   selectManualDate(){
     this.selectedDate=this.selectedDate;
     this.changeDate='off';
-    console.log(this.selectedDate);
   }
   transportStaticData(transportData){
     transportData.getStops().then(stopsData =>

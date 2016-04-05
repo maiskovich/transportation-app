@@ -1,15 +1,12 @@
 describe('service clock', () => {
   beforeEach(angular.mock.module('transportationApp'));
 
+
   it('should be registered', inject(clock => {
     expect(clock).not.toEqual(null);
   }));
 
-  describe('tick', () => {
-    it('should exist', inject(clock => {
-      expect(clock.tick).not.toEqual(null);
-    }));
-  });
+
   describe('getHour function', () => {
     it('should exist', inject(clock => {
       expect(clock.getHour).not.toEqual(null);
