@@ -1,11 +1,13 @@
 # transportation-app
 Udacity Senior web developer 2st project
 
+**Demo: https://transportation-app.firebaseapp.com/#/**
 
 Transportation app is a web app for searching trains between different stations with features as:
 * Offline first
 * Responsive Design
 * Angular Material Design
+* ES6
 
 Its build with angularJS and based in the [Yeoman gulp-AngularJS generator](https://github.com/Swiip/generator-gulp-angular).
 
@@ -25,9 +27,6 @@ After cloning the repository you should run:
 
 For the development phase, use the command `gulp serve` to lunch server which supports live reload of your modifications.
 
-#### `test`
-
-For testing, a fully working test environment is shipped. It uses Karma (with gulp test) for the unit tests.
 
 #### `build`
 
