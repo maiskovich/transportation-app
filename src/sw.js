@@ -1,4 +1,4 @@
-var staticCacheName = 'transportation-static-v29';
+var staticCacheName = 'transportation-static-v31';
 var allCaches = [
   staticCacheName
 ];

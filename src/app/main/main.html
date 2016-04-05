@@ -12,18 +12,18 @@
     </md-toolbar>
     <div ng-if="!main.possibleTrips" class="animate-if">
     <div layout="column" layout-align="center center">
-    <h3 class="md-headline" ng-if="main.changeDate=='off' && !main.selectedDate" class="animate-if">{{ clock.Time | date:'HH:mm:ss'}}</h3>
+    <h3 class="md-headline" ng-if="main.changeDate=='off' && !main.selectedDate" class="animate-if">{{ clock.Time | date:'HH:mm'}}</h3>
       <h3 class="md-headline" ng-if="main.changeDate=='off' && !main.selectedDate" class="animate-if">{{ clock.Time | date:'EEEE dd, MMMM, yyyy'}}</h3>
-      <h3 class="md-headline" ng-if="main.changeDate=='off' && main.selectedDate" class="animate-if">{{ main.selectedDate | date:'HH:mm:ss'}}</h3>
+      <h3 class="md-headline" ng-if="main.changeDate=='off' && main.selectedDate" class="animate-if">{{ main.selectedDate | date:'HH:mm'}}</h3>
       <h3 class="md-headline" ng-if="main.changeDate=='off' && main.selectedDate" class="animate-if">{{ main.selectedDate | date:'EEEE dd, MMMM, yyyy'}}</h3>
-      <md-button ng-if="main.changeDate=='off'" ng-click="main.changeDate='on'" class="md-raised md-primary animate-if"> Other Date </md-button>
+      <md-button ng-if="main.changeDate=='off'" ng-click="main.changeDate='on'" class="md-raised md-warn animate-if"> Other Date </md-button>
       <br>
       <time-date-picker ng-if="main.changeDate=='on'" class="animate-if" ng-model="main.selectedDate"
                         on-save="main.selectManualDate()" on-cancel="main.changeDate='off'"
                         display-twentyfour="true">
       </time-date-picker>
     </div>
-      <div layout="row" layout-sm="column" layout-align="center center" style="height: 50vh">
+      <div layout="row" layout-sm="column" layout-align="center center" style="height: 30vh">
       <div flex>
         <md-autocomplete required
           md-selected-item="main.selectedItemDeparture"
@@ -46,7 +46,6 @@
         <md-autocomplete required
                          ng-disabled="!main.selectedItemDeparture"
                          md-selected-item="main.selectedItemArrival"
-                         md-selected-item-change="main.arrivalSelected()"
                          md-search-text="searchTextArrival"
                          md-items="stop in main.stopsDataArrival.data | filter:(!!searchTextArrival || undefined) && {stop_name: searchTextArrival}"
                          md-item-text="stop.stop_name" md-match-case-insensitive="true"
@@ -62,6 +61,9 @@
         </md-autocomplete>
       </div>
     </div>
+      <div layout="column"   layout-align="start center">
+        <md-button ng-click="main.arrivalSelected()" class="md-raised md-primary animate-if"> Search </md-button>
+      </div>
     </div>
       <md-list ng-if="main.possibleTrips.length">
         <md-list-item class="md-3-line" ng-repeat="trip in main.possibleTrips  | orderBy : Number(trip.departure.departure_time) | limitTo:10">
