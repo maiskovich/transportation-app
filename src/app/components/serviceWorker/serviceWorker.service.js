@@ -5,6 +5,7 @@ export class ServiceWorkerService {
     this.$http = $http;
     this.$mdToast=$mdToast;
   }
+  //Register the service worker to the browser
   register() {
     let self=this;
     if ('serviceWorker' in navigator) {
@@ -27,6 +28,7 @@ export class ServiceWorkerService {
     }
 
   };
+  //Track the installation process of the service worker
   trackInstalling(worker) {
     let self=this;
   worker.addEventListener('statechange', function() {
@@ -35,7 +37,7 @@ export class ServiceWorkerService {
     }
   });
 };
-
+//Show a toast message when an update of the sw file is available
   updateReady(worker) {
     var toast = this.$mdToast.simple({hideDelay: 5000})
       .textContent('New update available')
