@@ -11,6 +11,13 @@ Transportation app is a web app for searching trains between different stations 
 
 Its build with angularJS and based in the [Yeoman gulp-AngularJS generator](https://github.com/Swiip/generator-gulp-angular).
 
+The app was made to process [GTFS](https://developers.google.com/transit/gtfs/) feed data and in this case is using
+ data from the Bay Area Rapid Transit (BART), the GTFS files are located in 
+the `src/data/GTFS` folder, it is being parsed with [Papa Parse](http://papaparse.com/).
+
+The GTFS files can be replace with data from [any other location](http://transitfeeds.com/) without needing additional 
+actions.
+
 ## Install
 
 After cloning the repository you should run:
